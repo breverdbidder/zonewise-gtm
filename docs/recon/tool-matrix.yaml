@@ -1,0 +1,102 @@
+# AI Topia Tool Dependency Matrix
+# Scraped from getaitopia.io — March 27, 2026
+
+paid_services:
+  dataforseo:
+    cost: "$50-80/mo"
+    used_by: [keyword_research, keyword_validator, gap_analyzer, keyword_overlap_analyzer]
+    our_equivalent: "None — NEED"
+    priority: P1
+  apify:
+    cost: "$49+/mo"
+    used_by: [competitor_monitor, content_extractor]
+    our_equivalent: "Custom scrapers + Firecrawl"
+    priority: P1
+  heygen:
+    cost: "$29-89/mo"
+    used_by: [heygen_producer, vsl_generator, avatar_generator]
+    our_equivalent: "None"
+    priority: P2
+  blotato:
+    cost: "$19-49/mo"
+    used_by: [linkedin_agent, twitter_agent]
+    our_equivalent: "None — NEED"
+    priority: P0
+  openrouter:
+    cost: "$100-300/mo"
+    used_by: [article_writer, content_director, all_content_agents]
+    our_equivalent: "Smart Router (Gemini FREE / DeepSeek / Claude)"
+    priority: HAVE
+  perplexity:
+    cost: "$20/mo"
+    used_by: [topic_discovery, lead_enricher]
+    our_equivalent: "None"
+    priority: P2
+  apollo:
+    cost: "$49+/mo"
+    used_by: [lead_retriever]
+    our_equivalent: "None — NEED for outreach"
+    priority: P1
+  instantly:
+    cost: "$30+/mo"
+    used_by: [email_sequencer]
+    our_equivalent: "None"
+    priority: P2
+  unipile:
+    cost: "unknown"
+    used_by: [linkedin_automator]
+    our_equivalent: "None"
+    priority: P2
+  tavily:
+    cost: "unknown"
+    used_by: [lead_enricher]
+    our_equivalent: "None"
+    priority: P2
+  reb2b:
+    cost: "unknown"
+    used_by: [visitor_identification]
+    our_equivalent: "None — INTERESTING"
+    priority: P2
+
+free_services:
+  google_search_console:
+    used_by: [site_auditor, rank_tracker]
+    our_equivalent: "None connected"
+    priority: P0
+  google_analytics_4:
+    used_by: [site_auditor, performance_tracking]
+    our_equivalent: "None on zonewise.ai"
+    priority: P0
+  n8n:
+    used_by: [pipeline_orchestrator, all_workflows]
+    our_equivalent: "GitHub Actions + SUMMIT"
+    priority: HAVE_BETTER
+  wordpress:
+    used_by: [wordpress_publisher]
+    our_equivalent: "Cloudflare Pages (static)"
+    priority: DIFFERENT
+  supabase:
+    used_by: [rag_searcher, all_storage, brand_voice_keeper]
+    our_equivalent: "Supabase (50+ tables)"
+    priority: HAVE
+  imagekit:
+    used_by: [image_creator, thumbnail_generator]
+    our_equivalent: "None"
+    priority: P2
+
+infrastructure:
+  frontend: "Next.js + React + TypeScript + Tailwind + Radix UI"
+  ai_framework: "Python + Agno Framework + FastAPI"
+  database: "Supabase PostgreSQL + pgvector + RLS"
+  orchestration: "n8n (primary)"
+  hosting: "Vercel (inferred)"
+  tracking: "GA4 G-B54J0XBMZ4 + Reb2b Q6J2RH2VLL6D"
+
+our_advantages:
+  - "Smart Router 3-tier LLM cost optimization"
+  - "Sentinel self-healing monitoring (zero-HITL)"
+  - "GitHub Actions distributed CI/CD (20+ workflows)"
+  - "AUTOLOOP nightly self-improvement evals"
+  - "ESF enterprise security framework"
+  - "Layer 3 path-specific rules"
+  - "10.8M FL parcels data moat"
