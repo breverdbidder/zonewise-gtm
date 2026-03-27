@@ -1,0 +1,75 @@
+name: "SUMMIT: Marketing Agent Phase 1"
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "Task for Claude Code"
+        required: false
+        default: "Read CLAUDE.md and execute Phase 1 — run migration, build common modules, build first 5 agents, deploy GHA workflow, build evals, generate first 3 LinkedIn posts"
+
+jobs:
+  dispatch-to-hetzner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Dispatch to Hetzner via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          CLAUDE_OAUTH_B64: ${{ secrets.CLAUDE_OAUTH_B64 }}
+        with:
+          host: 87.99.129.125
+          username: claude
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          envs: CLAUDE_OAUTH_B64
+          command_timeout: 110m
+          script: |
+            set -e
+            
+            # Setup OAuth token
+            echo "$CLAUDE_OAUTH_B64" | base64 -d > /tmp/claude-oauth-token
+            export CLAUDE_CODE_OAUTH_TOKEN=$(cat /tmp/claude-oauth-token)
+            
+            # Setup paths
+            export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
+            export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+            
+            # Clone or pull zonewise-gtm
+            cd $HOME
+            if [ -d "zonewise-gtm" ]; then
+              cd zonewise-gtm
+              git pull origin main
+            else
+              git clone https://github.com/breverdbidder/zonewise-gtm.git
+              cd zonewise-gtm
+            fi
+            
+            # Install plugins
+            npx cc-status-line@latest 2>/dev/null || true
+            
+            # Start Claude Code session
+            echo "=== SUMMIT DISPATCH: Marketing Agent Phase 1 ==="
+            echo "Task: ${{ github.event.inputs.task }}"
+            echo "Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            
+            claude --auto "Read CLAUDE.md. Execute Phase 1 in order: (1) Run migrations/20260327_marketing_tables.sql against Supabase to create 16 marketing tables. (2) Build agents/common/ — supabase_client.py, smart_router.py, brand_voice.py, cost_tracker.py, shabbat.py. (3) Build agents/content/data_storyteller.py that queries real Supabase county_conquest_status + historical_auctions and generates marketing narratives. (4) Build agents/content/linkedin.py that creates 3 branded posts from data stories. (5) Build agents/distribution/orchestrator.py that queues posts to marketing_social_posts table. (6) Build .github/workflows/marketing-content-daily.yml scheduled for 7AM EST Mon-Fri. (7) Build eval/content/data_storyteller.json with 25 binary assertions. (8) Run data_storyteller.py and linkedin.py to generate first 3 real LinkedIn posts from Supabase data. (9) Commit everything and push. (10) Send Telegram notification confirming pipeline works. COST CAP: dollar10 session max. NEVER-LIE: every stat from real Supabase query."
+            
+            echo "=== SUMMIT COMPLETE ==="
+
+      - name: Notify Telegram
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          STATUS="${{ job.status }}"
+          if [ "$STATUS" = "success" ]; then
+            EMOJI="✅"
+          else
+            EMOJI="❌"
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            -d "text=${EMOJI} SUMMIT: Marketing Agent Phase 1 — ${STATUS}
+          Repo: zonewise-gtm
+          Run: https://github.com/breverdbidder/zonewise-gtm/actions/runs/${{ github.run_id }}"
