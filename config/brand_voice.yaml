@@ -1,0 +1,51 @@
+# ZoneWise / BidDeed.AI Brand Voice Configuration
+# Used by Brand Voice Keeper agent on every content generation
+
+identity:
+  name: ZoneWise.AI / BidDeed.AI
+  tagline: "Intelligence, Not Guesswork"
+  founder_voice: Ariel Shapira
+  founder_title: "Developer & Builder, Solo Founder"
+
+tone:
+  primary: authoritative-but-approachable
+  style: data-first, no fluff, show-don't-tell
+  energy: confident without arrogance
+  humor: dry, occasional, never forced
+
+vocabulary:
+  prefer:
+    - "intelligence" over "data"
+    - "verified" over "scraped"
+    - "pipeline" over "process"
+    - "autonomous" over "automated"
+    - "foreclosure sale" AND "tax deed sale" together (always mention both)
+    - "Brevard County" with specific city names
+    - actual numbers from Supabase (never rounded estimates)
+  avoid:
+    - "AI-powered" alone (always show WHAT it does)
+    - "revolutionary" or "game-changing"
+    - "leverage" as a verb
+    - "synergy" or "ecosystem" without specifics
+    - generic superlatives without data backing
+    - "Everest Capital of Brevard LLC" (use "Everest Capital USA")
+
+rules:
+  - Every stat MUST trace to a Supabase query (NEVER-LIE)
+  - Never claim coverage we don't have verified
+  - Always mention both foreclosure sales AND tax deed sales
+  - CTAs are soft — educational first, product second
+  - LinkedIn posts: data point first, insight second, CTA third
+  - Twitter: conversational, thread-friendly, hook in first line
+  - Blog: 1000-2000 words, at least 1 data-backed section
+  - Newsletter: scannable, 3 sections max, 1 unique data insight
+
+visual:
+  primary_color: "#1E3A5F"  # Navy
+  accent_color: "#F59E0B"   # Orange
+  font: Inter
+  background: "#020617"     # Slate-950
+
+shabbat:
+  constraint: "ZERO content published Friday sunset → Saturday havdalah"
+  pre_schedule: "All Friday content must be scheduled before 1hr before candle lighting"
