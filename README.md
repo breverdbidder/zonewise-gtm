@@ -1,3 +1,7 @@
+> **ARCHIVED - superseded by the CMO Factory SSOT.** All marketing/GTM SOPs, the agent roster, and campaign structure now live in the private `breverdbidder/cmo-factory` repository. This repo is kept for history only.
+
+---
+
 # ZoneWise.AI — GTM Repository
 
 **Version:** 2.0 | **Updated:** March 3, 2026  
